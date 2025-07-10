@@ -1,9 +1,9 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState, useImperativeHandle, forwardRef } from 'react';
 import TabViewCarousel, {
   type CarouselImperativeHandle,
 } from './TabViewCarousel';
 
-import { type TabViewProps } from '../types/TabView';
+import { type TabViewProps, type TabViewRef } from '../types/TabView';
 import { View } from 'react-native';
 import type { LayoutChangeEvent } from 'react-native';
 import type { Layout } from '../types/common';
@@ -12,7 +12,7 @@ import { TabBar } from './TabBar';
 import { StyleSheet } from 'react-native';
 import { TabLayoutContextProvider } from '../providers/TabLayout';
 
-export const TabView = React.memo((props: TabViewProps) => {
+export const TabView = React.memo(forwardRef<TabViewRef, TabViewProps>((props, ref) => {
   const {
     navigationState,
     initialLayout,
@@ -51,6 +51,14 @@ export const TabView = React.memo((props: TabViewProps) => {
   const jumpTo = useCallback((route: string) => {
     tabViewCarouselRef.current?.jumpToRoute(route);
   }, []);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      jumpToRoute: jumpTo,
+    }),
+    [jumpTo]
+  );
 
   const animatedRouteIndex = useSharedValue(navigationState.index);
 
@@ -128,7 +136,7 @@ export const TabView = React.memo((props: TabViewProps) => {
       </View>
     </TabLayoutContextProvider>
   );
-});
+}));
 
 const styles = StyleSheet.create({
   containerLayout: {

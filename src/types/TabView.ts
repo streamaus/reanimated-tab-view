@@ -11,6 +11,10 @@ import type {
 } from './common';
 import type { TabBarProps } from './TabBar';
 
+export type TabViewRef = {
+  jumpToRoute: (route: string) => void;
+};
+
 export type TabViewProps = Omit<ViewProps, 'children'> & {
   onIndexChange: (index: number) => void;
   navigationState: NavigationState;
