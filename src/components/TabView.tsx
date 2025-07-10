@@ -8,7 +8,7 @@ import { View } from 'react-native';
 import type { LayoutChangeEvent } from 'react-native';
 import type { Layout } from '../types/common';
 import { useSharedValue } from 'react-native-reanimated';
-import TabBar from './TabBar';
+import { TabBar } from './TabBar';
 import { StyleSheet } from 'react-native';
 import { TabLayoutContextProvider } from '../providers/TabLayout';
 

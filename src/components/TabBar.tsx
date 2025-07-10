@@ -11,7 +11,7 @@ import TabIndicator from './TabIndicator';
 import { TAB_BAR_HEIGHT, TAB_BAR_PADDING_VERTICAL } from '../constants/tabBar';
 import Tab from './Tab';
 
-const TabBar = React.memo((props: TabBarProps) => {
+export const TabBar = React.memo((props: TabBarProps) => {
   const {
     navigationState,
     routeIndex: currentRouteIndex,
@@ -174,7 +174,6 @@ const TabBar = React.memo((props: TabBarProps) => {
     </View>
   );
 });
-export default TabBar;
 
 const styles = StyleSheet.create({
   tabBarContainer: {

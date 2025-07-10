@@ -140,9 +140,99 @@ export default function TabViewExample() {
 | tabBarType          | Specifies the type of the tab bar, according to the Material Design spec. | No       | `'primary'\|'secondary'`    | 'secondary' |
 | smoothJump          | Enables or disables smooth jumping between tabs.                          | No       | Boolean                     | true        |
 | tabBarScrollEnabled | Enables or disables scrollable tab bar.                                   | No       | Boolean                     | true        |
-| renderTabBar        | Custom method to render the tab bar.                                      | No       | Function                    | undefined   |
+| renderTabBar        | Custom method to render the tab bar. Can use the exposed `TabBar` component for enhanced customization. | No       | Function                    | undefined   |
 | onSwipeEnd          | Callback function for when a swipe gesture ends.                          | No       | Function                    | undefined   |
 | onSwipeStart        | Callback function for when a swipe gesture starts.                        | No       | Function                    | undefined   |
+
+## Customization
+
+`TabBar` component is available as a named export, enabling enhanced customization through the `renderTabBar` prop:
+
+```js
+import React, { useState } from 'react';
+import { View, Text, useWindowDimensions } from 'react-native';
+import { TabView, TabBar } from '@streamaus/reanimated-tab-view';
+
+export default function CustomTabViewExample() {
+  const layout = useWindowDimensions();
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    { key: 'first', title: 'First Tab' },
+    { key: 'second', title: 'Second Tab' },
+    { key: 'third', title: 'Third Tab' },
+  ]);
+
+  const renderScene = ({ route }) => {
+    switch (route.key) {
+      case 'first':
+        return <View style={{ flex: 1, backgroundColor: '#ff4081' }}><Text>First Scene</Text></View>;
+      case 'second':
+        return <View style={{ flex: 1, backgroundColor: '#673ab7' }}><Text>Second Scene</Text></View>;
+      case 'third':
+        return <View style={{ flex: 1, backgroundColor: '#4caf50' }}><Text>Third Scene</Text></View>;
+      default:
+        return null;
+    }
+  };
+
+  const renderTabBar = (props) => (
+    <TabBar
+      {...props}
+      style={customStyles.tabBar}
+      activeColor="#007AFF"
+      inactiveColor="#8E8E93"
+    />
+  );
+
+  return (
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      renderTabBar={renderTabBar}
+      initialLayout={{ width: layout.width }}
+    />
+  );
+}
+
+const customStyles = {
+  tabBar: {
+    backgroundColor: 'white',
+    elevation: 2,
+  },
+};
+```
+
+#### When to use the TabBar component
+
+- **For enhanced customization**: When you need to customize tab bar appearance while keeping core animations
+- **For advanced layouts**: When wrapping the tab bar in custom containers or adding decorative elements
+- **For consistent behavior**: When you want custom styling that goes beyond the built-in style props
+
+### TabBar Props
+
+The `TabBar` component accepts all React Native `ViewProps` (excluding `children`) plus:
+
+| Name | Description | Required | Type | Default |
+|------|-------------|----------|------|---------|
+| `navigationState` | The navigation state containing index and routes | Yes | `NavigationState` | - |
+| `routeIndex` | The current route index | Yes | `number` | - |
+| `layout` | The layout dimensions of the tab view | Yes | `Layout` | - |
+| `animatedRouteIndex` | Shared value for animated route index | Yes | `SharedValue<number>` | - |
+| `jumpTo` | Function to jump to a specific route | Yes | `(key: string) => void` | - |
+| `scrollEnabled` | Whether the tab bar should be scrollable | No | `boolean` | `false` |
+| `bounces` | Whether the tab bar should bounce when scrolling | No | `boolean` | - |
+| `activeColor` | Color for the active tab | No | `string` | - |
+| `inactiveColor` | Color for inactive tabs | No | `string` | - |
+| `tabBarType` | Type of tab bar according to Material Design | No | `'primary' \| 'secondary'` | `'secondary'` |
+| `getLabelText` | Function to get label text for a scene | No | `(scene: Scene) => string \| undefined` | - |
+| `renderTabBarItem` | Custom function to render tab bar items | No | `(props: TabBarItemProps) => React.ReactNode` | - |
+| `onTabPress` | Callback when a tab is pressed | No | `(scene: Scene) => void` | - |
+| `onTabLongPress` | Callback when a tab is long pressed | No | `(scene: Scene) => void` | - |
+| `tabBarItemStyle` | Style for individual tab bar items | No | `StyleProp<ViewStyle>` | - |
+| `indicatorStyle` | Style for the tab indicator | No | `StyleProp<ViewStyle>` | - |
+| `labelStyle` | Style for tab labels | No | `StyleProp<TextStyle>` | - |
+| `contentContainerStyle` | Style for the tab bar content container | No | `StyleProp<ViewStyle>` | - |
 
 ## Author
 
