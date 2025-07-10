@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "reanimated-tab-view": ["./src/index"]
+      "@streamaus/reanimated-tab-view": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

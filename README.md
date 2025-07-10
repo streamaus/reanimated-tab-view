@@ -1,8 +1,10 @@
-# Reanimated Tab View
+# @streamaus/reanimated-tab-view
+
+> **Note:** This is a fork of [`reanimated-tab-view`](https://github.com/adithyavis/reanimated-tab-view) published under the @streamaus organization.
 
 A custom Tab View component implemented using [`react-native-reanimated`](https://github.com/software-mansion/react-native-reanimated/) and [`react-native-gesture-handler`](https://github.com/software-mansion/react-native-gesture-handler/). Props are almost entirely inter-compatible with [`react-native-tab-view`](https://github.com/satya164/react-native-tab-view)
 
-- The [example/](https://github.com/adithyavis/reanimated-tab-view/tree/main/example) folder contains reference code to use the library.
+- The [example/](https://github.com/streamaus/reanimated-tab-view/tree/main/example) folder contains reference code to use the library.
 
 ## Demo
 
@@ -73,7 +75,7 @@ Install react-native-reanimated (>=2.x) and react-native-gesture-handler (>=2.x)
 Open a Terminal in the project root and run:
 
 ```sh
-yarn add reanimated-tab-view
+yarn add @streamaus/reanimated-tab-view
 ```
 
 ## Quick Start
@@ -81,7 +83,7 @@ yarn add reanimated-tab-view
 ```js
 import * as React from 'react';
 import { View, useWindowDimensions } from 'react-native';
-import { TabView } from 'reanimated-tab-view';
+import { TabView } from '@streamaus/reanimated-tab-view';
 
 const FirstRoute = () => (
   <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
@@ -144,7 +146,11 @@ export default function TabViewExample() {
 
 ## Author
 
-- [Adithya Viswamithiran](https://github.com/adithyavis/)
+- [Streamaus](https://github.com/streamaus/)
+
+## Original Author
+
+- [Adithya Viswamithiran](https://github.com/adithyavis/) - Original creator of reanimated-tab-view
 
 ## License
 
