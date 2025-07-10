@@ -12,7 +12,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
   TabView as ReanimatedTabView,
   type NavigationState,
-} from 'reanimated-tab-view';
+} from '@streamaus/reanimated-tab-view';
 import {
   TabView as TabView,
   TabBar as ReactNavigationTabBar,
